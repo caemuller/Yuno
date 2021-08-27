@@ -1,11 +1,20 @@
+import discord as disc
+import os
 
-lista_nomes = ['caetano', 'mateus', 'Alves', 'porto']
-lista_fodase = [1,23,42,124,53,315,5315,135,9]
+client = disc.Client()
 
-for i in lista_nomes:
-    for j in lista_fodase:
-        if(len(i) > 5):
-            print(j)
-        else:
-            print('nome pequeno hehehehe')
-            break
+#online message
+@client.event
+async def on_ready():
+    print('{0.user} is online <3'.format(client))
+
+#message form the bot
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+    
+    if message.content.startswith('//y hi'):
+        await message.channel.send("Hi I'm Yuno")
+    
+client.run(os.getenv('yuno_code'))
